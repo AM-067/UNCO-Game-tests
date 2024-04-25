@@ -3,17 +3,17 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    public int MaxHealth = 100;
+    private int _maxHealth = 100;
 
-    public int CurrentHealth;
+    private int _currentHealth;
 
-    public PlayerHealth HealthBar;
+    [SerializeField] private Health healthBar;
 
     // Start is called before the first frame update
     void Start()
     {
-        CurrentHealth = MaxHealth;
-        HealthBar.SetMaxHealth(MaxHealth);
+        _currentHealth = _maxHealth;
+        healthBar.SetMaxHealth(_maxHealth);
         
         
         Cursor.lockState = CursorLockMode.Locked;
@@ -25,8 +25,13 @@ public class Player : MonoBehaviour
     
     void TakeDamage(int damage)
     {
-        CurrentHealth -= damage;
-        HealthBar.SetHealth(CurrentHealth);
+        _currentHealth -= damage;
+        healthBar.SetHealth(_currentHealth);
+        
+        if (_currentHealth <= 0)
+        {
+            Die();
+        }
     }
     
 
@@ -37,14 +42,7 @@ public class Player : MonoBehaviour
             TakeDamage(20);
         }
     }
-
-    private void FixedUpdate()
-    {
-        if (CurrentHealth <= 0)
-        {
-            Die();
-        }
-    }
+    
 
     void Die()
     {

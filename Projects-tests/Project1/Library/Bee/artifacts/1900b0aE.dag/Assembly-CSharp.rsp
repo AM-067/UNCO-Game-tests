@@ -359,8 +359,8 @@
 "Assets/Scripts/CS_Aim.cs"
 "Assets/Scripts/CS_Enemyt1.cs"
 "Assets/Scripts/CS_Enemyt2.cs"
+"Assets/Scripts/Health.cs"
 "Assets/Scripts/Player.cs"
-"Assets/Scripts/PlayerHealth.cs"
 "Assets/Scripts/RBMovement.cs"
 "Assets/Scripts/ShootingSystem.cs"
 -langversion:9.0

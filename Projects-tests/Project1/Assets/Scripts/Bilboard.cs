@@ -9,6 +9,14 @@ public class Bilboard : MonoBehaviour
     
     void LateUpdate()
     {
-        transform.LookAt(transform.position + Cam.forward);
+        if (Cam != null)
+        {
+            transform.LookAt(transform.position + Cam.forward); 
+        }
+        else
+        {
+            Debug.Log("Cam Not Found!");
+        }
+        
     }
 }

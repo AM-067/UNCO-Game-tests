@@ -27,24 +27,40 @@ public class RBMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        Vector3 MoveVector = transform.TransformDirection(_playerMovementInput) * speed;
-        playerBody.velocity = new Vector3(MoveVector.x, playerBody.velocity.y, MoveVector.z);
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (playerBody != null)
         {
-            if (Physics.CheckSphere(feetTransform.position,0.1f,floorMask))
+            Vector3 MoveVector = transform.TransformDirection(_playerMovementInput) * speed;
+            playerBody.velocity = new Vector3(MoveVector.x, playerBody.velocity.y, MoveVector.z);
+
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                playerBody.AddForce(Vector3.up * jumpSpeed,ForceMode.Impulse);    
-            }
+                if (Physics.CheckSphere(feetTransform.position,0.1f,floorMask))
+                {
+                    playerBody.AddForce(Vector3.up * jumpSpeed,ForceMode.Impulse);    
+                }
             
+            }
         }
+        else
+        {
+            Debug.Log("PLayer not found!");
+        }
+       
     }
 
     private void MovePlayerCamera()
     {
-        _xRot -= _playerMouseInput.y * sensivity;
+        if (playerCamera != null)
+        {
+            _xRot -= _playerMouseInput.y * sensivity;
         
-        transform.Rotate(0f,_playerMouseInput.x * sensivity,0f);
-        playerCamera.transform.localRotation = Quaternion.Euler(_xRot,0f,0f);
+            transform.Rotate(0f,_playerMouseInput.x * sensivity,0f);
+            playerCamera.transform.localRotation = Quaternion.Euler(_xRot,0f,0f);
+        }
+        else
+        {
+            Debug.Log("Cam not found!");
+        }
+       
     }
 }

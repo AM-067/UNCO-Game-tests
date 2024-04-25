@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ShootingSystem : MonoBehaviour
 {
-    public GameObject ProjectilePrefab;
+    [SerializeField] private Rigidbody projectilePrefab;
     public Transform LaunchPoint;
     public float ShootForce = 1000f;
     
@@ -16,19 +16,14 @@ public class ShootingSystem : MonoBehaviour
 
     void Shoot()
     {
-        
-        GameObject projecTile = Instantiate(ProjectilePrefab, LaunchPoint.position, LaunchPoint.rotation);
-        
-      
-       
-        Rigidbody rb = projecTile.GetComponent<Rigidbody>();
+
+        Rigidbody rb = Instantiate(projectilePrefab, LaunchPoint.position, LaunchPoint.rotation);
         
         
         if (rb != null)
         {
-          
             rb.AddForce(LaunchPoint.up * ShootForce);
-            Destroy(projecTile,5f);
+            Destroy(rb.gameObject,5f);
         }
         else
         {

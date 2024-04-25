@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NewAimSystem : MonoBehaviour
+public class CS_Aim : MonoBehaviour
 {
     public Transform PlayerCameraTransform;
     public float AimSpeed = 10f;
@@ -12,13 +12,23 @@ public class NewAimSystem : MonoBehaviour
     private Vector3 _aimPosition;
     private float _normalFieldOfView;
     private bool _isAiming = false;
+    private Camera _mainCam;
 
     void Start()
     {
       
         _normalPosition = transform.localPosition;
         _aimPosition = new Vector3(_normalPosition.x, _normalPosition.y, _normalPosition.z + 1f);
-        _normalFieldOfView = PlayerCameraTransform.GetComponent<Camera>().fieldOfView;
+        if (PlayerCameraTransform != null)
+        {
+            _mainCam = PlayerCameraTransform.GetComponent<Camera>(); 
+        }
+        else
+        {
+            Debug.Log("Cam not Found!");
+        }
+        
+        _normalFieldOfView = _mainCam.fieldOfView;
     }
 
     void Update()
@@ -28,28 +38,35 @@ public class NewAimSystem : MonoBehaviour
 
     void HandleAiming()
     {
-        if (Input.GetMouseButton(1))
+        if (_mainCam != null)
         {
+            if (Input.GetMouseButton(1))
+            {
             
-            transform.localPosition = Vector3.Lerp(transform.localPosition, _aimPosition, AimSpeed * Time.deltaTime);
+                transform.localPosition = Vector3.Lerp(transform.localPosition, _aimPosition, AimSpeed * Time.deltaTime);
 
-      
-            PlayerCameraTransform.GetComponent<Camera>().fieldOfView = Mathf.Lerp(PlayerCameraTransform.GetComponent<Camera>().fieldOfView, MinFieldOfView, ZoomSpeed * Time.deltaTime);
 
+                _mainCam.fieldOfView = Mathf.Lerp(_mainCam.fieldOfView, MinFieldOfView, ZoomSpeed * Time.deltaTime);
+            
           
-            _isAiming = true;
+                _isAiming = true;
+            }
+            else
+            {
+       
+                transform.localPosition = Vector3.Lerp(transform.localPosition, _normalPosition, AimSpeed * Time.deltaTime);
+
+         
+                _mainCam.fieldOfView = Mathf.Lerp(_mainCam.fieldOfView, _normalFieldOfView, ZoomSpeed * Time.deltaTime);
+        
+                _isAiming = false;
+            }
         }
         else
         {
-       
-            transform.localPosition = Vector3.Lerp(transform.localPosition, _normalPosition, AimSpeed * Time.deltaTime);
-
-         
-            PlayerCameraTransform.GetComponent<Camera>().fieldOfView = Mathf.Lerp(PlayerCameraTransform.GetComponent<Camera>().fieldOfView, _normalFieldOfView, ZoomSpeed * Time.deltaTime);
-
-        
-            _isAiming = false;
+            Debug.Log("Cam destroyed!");
         }
+        
     }
 
     public bool IsAiming()

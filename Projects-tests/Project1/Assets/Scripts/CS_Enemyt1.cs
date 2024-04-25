@@ -5,31 +5,43 @@ public class CS_Enemyt1 : MonoBehaviour
     [SerializeField] private float speed = 10f;
     [SerializeField] Transform target;
     
-    public int MaxHealth = 100;
+    private int _maxHealth = 100;
 
-    public int CurrentHealth;
+    private int _currentHealth;
 
     public int Damage;
     
-    public PlayerHealth HealthBar;
+    [SerializeField] private Health healthBar;
     
     private void Start()
     {
-        CurrentHealth = MaxHealth;
-        HealthBar.SetMaxHealth(MaxHealth);
+        _currentHealth = _maxHealth;
+        healthBar.SetMaxHealth(_maxHealth);
     }
 
     void TakeDamage(int damage)
     {
-        CurrentHealth -= damage;
-        HealthBar.SetHealth(CurrentHealth);
+        _currentHealth -= damage;
+        healthBar.SetHealth(_currentHealth);
+        
+        if (_currentHealth <= 0)
+        {
+            Die();
+        }
     }
     
     void Update()
     {
-
-        transform.LookAt(target);
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        if (target != null)
+        {
+            transform.LookAt(target);
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        }
+        else
+        {
+            Debug.Log("Target not found!");
+        }
+        
         
     }
     
@@ -47,15 +59,7 @@ public class CS_Enemyt1 : MonoBehaviour
             Debug.Log("hit");
         }
     }
-    
-    private void FixedUpdate()
-    {
-        if (CurrentHealth <= 0)
-        {
-            Die();
-        }
-    }
-    
+
     void Die()
     {
         Destroy(gameObject);

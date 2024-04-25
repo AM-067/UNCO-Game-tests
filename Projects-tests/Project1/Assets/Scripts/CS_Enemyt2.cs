@@ -8,43 +8,51 @@ public class CS_Enemyt2 : MonoBehaviour
 
     private bool _isFollowing = false;
     
-    public int MaxHealth = 100;
+    private int _maxHealth = 100;
 
-    public int CurrentHealth;
+    private int _currentHealth;
     
     public int Damage;
-    public PlayerHealth HealthBar;
+    [SerializeField] private Health healthBar;
 
     private void Start()
     {
-        CurrentHealth = MaxHealth;
-        HealthBar.SetMaxHealth(MaxHealth);
+        _currentHealth = _maxHealth;
+        healthBar.SetMaxHealth(_maxHealth);
     }
     
     void TakeDamage(int damage)
     {
-        CurrentHealth -= damage;
-        HealthBar.SetHealth(CurrentHealth);
+        _currentHealth -= damage;
+        healthBar.SetHealth(_currentHealth);
+        
+        if (_currentHealth <= 0)
+        {
+            Die();
+        }
     }
     
     void Update()
     {
-       
-        if (Vector3.Distance(transform.position, target.position) <= followDistance)
+        if (target != null)
         {
-            _isFollowing = true;
+            if (Vector3.Distance(transform.position, target.position) <= followDistance)
+            {
+                _isFollowing = true;
+            }
+        
+            if (_isFollowing)
+            {
+                transform.LookAt(target);
+                transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            }
+        }
+        else
+        {
+            Debug.Log("Target not found!");
         }
         
-        if (_isFollowing)
-        {
-            transform.LookAt(target);
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        }
         
-        if (CurrentHealth <= 0)
-        {
-            Die();
-        }
     }
 
     private void OnCollisionEnter(Collision collision)
