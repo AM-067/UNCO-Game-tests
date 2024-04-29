@@ -1129,6 +1129,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7853991436389536846, guid: 21a05acc3f7d5c445a854b5492d97b83, type: 3}
   m_PrefabInstance: {fileID: 653973880}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &655727205 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2658836469385733637, guid: bb418127f59038d4da847dcd9763eccb, type: 3}
+  m_PrefabInstance: {fileID: 7230434277896856312}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &664560075
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,6 +1699,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3801800330380032011, guid: fe3f2fa8ac348d247b547f132069d80b, type: 3}
   m_PrefabInstance: {fileID: 877151406}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &883679021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 883679023}
+  - component: {fileID: 883679022}
+  m_Layer: 0
+  m_Name: Objectpooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &883679022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883679021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f5242f4e9556084f95be4fb370a27a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PooledGameObject: {fileID: 4056278643450480100, guid: 7217eec40d5448b4996c4f92c9eb3b87, type: 3}
+  PoolAmount: 100
+  WillGrow: 0
+--- !u!4 &883679023
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883679021}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.8, y: 0, z: 22.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &914387656
 GameObject:
   m_ObjectHideFlags: 0
@@ -3609,6 +3661,42 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 190002098}
     - target: {fileID: 1313984561873395085, guid: bb418127f59038d4da847dcd9763eccb, type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 655727205}
+    - target: {fileID: 1313984561873395085, guid: bb418127f59038d4da847dcd9763eccb, type: 3}
+      propertyPath: shootRate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313984561873395085, guid: bb418127f59038d4da847dcd9763eccb, type: 3}
+      propertyPath: LunchPoint
+      value: 
+      objectReference: {fileID: 655727205}
+    - target: {fileID: 1313984561873395085, guid: bb418127f59038d4da847dcd9763eccb, type: 3}
+      propertyPath: bulletPool
+      value: 
+      objectReference: {fileID: 883679022}
+    - target: {fileID: 1313984561873395085, guid: bb418127f59038d4da847dcd9763eccb, type: 3}
+      propertyPath: BulletSpeed
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313984561873395085, guid: bb418127f59038d4da847dcd9763eccb, type: 3}
+      propertyPath: bulletSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313984561873395085, guid: bb418127f59038d4da847dcd9763eccb, type: 3}
+      propertyPath: launchPoint
+      value: 
+      objectReference: {fileID: 655727205}
+    - target: {fileID: 1313984561873395085, guid: bb418127f59038d4da847dcd9763eccb, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 4056278643450480100, guid: 7217eec40d5448b4996c4f92c9eb3b87, type: 3}
+    - target: {fileID: 1313984561873395085, guid: bb418127f59038d4da847dcd9763eccb, type: 3}
+      propertyPath: initialPoolSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313984561873395085, guid: bb418127f59038d4da847dcd9763eccb, type: 3}
       propertyPath: ProjectilePrefab
       value: 
       objectReference: {fileID: 9215411408954345790, guid: 7217eec40d5448b4996c4f92c9eb3b87, type: 3}
@@ -3616,6 +3704,10 @@ PrefabInstance:
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 9215411408954345790, guid: 7217eec40d5448b4996c4f92c9eb3b87, type: 3}
+    - target: {fileID: 1313984561873395085, guid: bb418127f59038d4da847dcd9763eccb, type: 3}
+      propertyPath: poolSizeIncrement
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1373369269799984872, guid: bb418127f59038d4da847dcd9763eccb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3770,3 +3862,4 @@ SceneRoots:
   - {fileID: 867720036}
   - {fileID: 225715230}
   - {fileID: 777138072}
+  - {fileID: 883679023}

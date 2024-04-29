@@ -1,33 +1,37 @@
+using System;
 using UnityEngine;
 
 public class ShootingSystem : MonoBehaviour
 {
-    [SerializeField] private Rigidbody projectilePrefab;
-    public Transform LaunchPoint;
-    public float ShootForce = 1000f;
     
-    void Update()
+    
+
+    public Transform LunchPoint;
+    public float BulletSpeed;
+
+
+    private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetMouseButton(0))
         {
-            Shoot();
+            shoot();
         }
     }
 
-    void Shoot()
+    private void shoot()
     {
+        GameObject obj = ObjectPooler.current.GetPooledObject();
+        if (obj == null)
+        {
+            Debug.Log("not shoot");
+            return;
+        }
 
-        Rigidbody rb = Instantiate(projectilePrefab, LaunchPoint.position, LaunchPoint.rotation);
-        
-        
-        if (rb != null)
-        {
-            rb.AddForce(LaunchPoint.up * ShootForce);
-            Destroy(rb.gameObject,5f);
-        }
-        else
-        {
-            Debug.LogError("Rigidbody component not found!");
-        }
+        obj.transform.position = LunchPoint.position;
+        obj.transform.rotation = LunchPoint.rotation;
+        obj.SetActive(true);
+        Rigidbody rb = obj.GetComponent<Rigidbody>();
+            rb.AddForce(LunchPoint.up * BulletSpeed);
+        Debug.Log("shoot");
     }
 }
