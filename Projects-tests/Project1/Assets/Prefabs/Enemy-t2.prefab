@@ -150,10 +150,11 @@ MonoBehaviour:
   speed: 10
   followDistance: 20
   target: {fileID: 0}
-  MaxHealth: 100
-  CurrentHealth: 0
+  enemyRenderer: {fileID: 2337742228632908750}
+  defaultMaterial: {fileID: 2100000, guid: a009944895d43e64c81556dac0e66903, type: 2}
+  followingMaterial: {fileID: 2100000, guid: ffcbb9ee644a33a489adb90a8c6dda8f, type: 2}
   Damage: 10
-  HealthBar: {fileID: 8412039444297744200}
+  healthBar: {fileID: 0}
 --- !u!1 &2380143546741895607
 GameObject:
   m_ObjectHideFlags: 0

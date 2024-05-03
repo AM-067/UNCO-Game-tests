@@ -47,6 +47,8 @@ public class Player : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+        GameManager.InstanceGameManager.PlayerIsDead = true;
+        GameManager.InstanceGameManager.GameOver();
         Debug.Log("GAME OVER");
     }
 }
